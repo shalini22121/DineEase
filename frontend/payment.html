@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f1e4;
+            text-align: center;
+            padding-top: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #payment-amount {
+            font-size: 1.8em;
+            color: #e1470a;
+            margin: 10px 0;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #success-message {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        /* Modal Styling */
+        #pin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        #pin-modal-content {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            width: 300px;
+        }
+        #pin-modal input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+        }
+        #pin-modal button {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2em;
+        }
+        #pin-modal button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Payment Page</h1>
+    <p>Your total is:</p>
+    <div id="payment-amount">₹0</div>
+
+    <form id="payment-form">
+        <!-- Step 1: Select Bank -->
+        <label for="bank-name">Select Bank Name:</label>
+        <select id="bank-name" name="bank-name" required>
+            <option value="">Select your bank</option>
+            <option value="IOB">IOB</option>
+            <option value="SBI">SBI</option>
+            <option value="ICICI">ICICI Bank</option>
+            <option value="HDFC">HDFC Bank</option>
+            <option value="Axis">Axis Bank</option>
+            <option value="Union">Union Bank</option>
+        </select>
+
+        <!-- Step 2: Enter Phone Number -->
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="Enter your phone number">
+
+        <!-- Step 3: Select Payment App -->
+        <label for="payment-app">Select Payment App:</label>
+        <select id="payment-app" name="payment-app" required>
+            <option value="">Select an app</option>
+            <option value="Google Pay">Google Pay</option>
+            <option value="Paytm">Paytm</option>
+            <option value="PhonePe">PhonePe</option>
+        </select>
+
+        <!-- Step 4: Select Payment Method -->
+        <label for="payment-method">Select Payment Method:</label>
+        <select id="payment-method" name="payment-method" required>
+            <option value="">Select a method</option>
+            <option value="UPI">UPI</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Credit Card">Credit Card</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button type="button" id="pay-now-btn">Pay Now</button>
+    </form>
+
+    <!-- Success Message -->
+    <div id="success-message">
+        <h2>Payment Successful!</h2>
+        <p>Thank you for your payment. A receipt has been sent to your email and phone number.</p>
+    </div>
+
+    <!-- PIN Modal -->
+    <div id="pin-modal">
+        <div id="pin-modal-content">
+            <h3>Enter your PIN</h3>
+            <input type="password" id="pin" placeholder="Enter PIN" required>
+            <button id="confirm-pin">Submit</button>
+            <button id="cancel-pin">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the total amount from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const totalAmount = parseFloat(urlParams.get('totalAmount'));
+    
+        // Display half the payment amount
+        if (totalAmount && totalAmount > 0) {
+            const halfAmount = (totalAmount / 2).toFixed(2);
+            document.getElementById('payment-amount').innerText = `₹${halfAmount}`;
+        } else {
+            alert('Invalid or missing total amount!');
+        }
+    
+        // Handle form submission
+        document.getElementById('pay-now-btn').addEventListener('click', function () {
+            const paymentMethod = document.getElementById('payment-method').value;
+    
+            // Check if payment method is UPI
+            if (paymentMethod === 'UPI') {
+                // If UPI, skip PIN and proceed
+                processPayment();
+            } else {
+                // Otherwise, show PIN modal
+                document.getElementById('pin-modal').style.display = 'flex';
+            }
+        });
+    
+        document.getElementById('confirm-pin').addEventListener('click', function () {
+            const pin = document.getElementById('pin').value;
+    
+            if (pin.length === 4) {
+                // PIN is correct (for simulation)
+                document.getElementById('pin-modal').style.display = 'none';
+                processPayment();
+            } else {
+                alert('Please enter a 4-6 valid PIN!');
+            }
+        });
+    
+        // Handle canceling the PIN entry
+        document.getElementById('cancel-pin').addEventListener('click', function () {
+            // Close the PIN modal and return to the payment page
+            document.getElementById('pin-modal').style.display = 'none';
+           
+        });
+    
+        function processPayment() {
+            const bankName = document.getElementById('bank-name').value;
+            const phone = document.getElementById('phone').value;
+            const paymentApp = document.getElementById('payment-app').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+    
+            if (!bankName || !phone || !paymentApp || !paymentMethod) {
+                alert('Please fill in all fields before proceeding!');
+                return;
+            }
+    
+            // Simulate payment success
+            setTimeout(() => {
+                // Display success message
+                document.getElementById('success-message').style.display = 'block';
+                
+    
+                // Simulate receipt details
+                console.log({
+                    bankName,
+                    phone,
+                    paymentApp,
+                    paymentMethod,
+                    amountPaid: totalAmount / 2,
+                });
+            }, 2000);
+        }
+    </script>
+    
+    
+</body>
+</html>

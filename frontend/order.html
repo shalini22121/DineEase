@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-order Food</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f1e4;
+            background-size: cover;
+            background-position: center;
+            animation: slideImages 50s infinite;
+        }
+
+        @keyframes slideImages {
+            0% { background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20241107/pngtree-indian-cuisine-traditional-dishes-overhead-background-image_16536345.jpg'); }
+            /* Add other image URLs here */
+            100% { background-image: url('https://media.istockphoto.com/id/497959594/photo/fresh-cakes.jpg?s=612x612&w=0&k=20&c=T1vp7QPbg6BY3GE-qwg-i_SqVpstyHBMIwnGakdTTek='); }
+        }
+
+        header {
+            background-color: rgba(251, 167, 167, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .food-section {
+            margin-bottom: 40px;
+        }
+
+        .food-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .food-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .food-item {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .food-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .food-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            padding: 15px;
+        }
+
+        .food-info h3 {
+            margin: 0 0 10px;
+            color: #555;
+        }
+
+        .food-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .food-info .price {
+            color: #e1470a;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .order-btn {
+            display: block;
+            margin: 15px 0 0;
+            text-align: center;
+            background-color: #7178f7;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #e63900;
+        }
+
+        #total-amount {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        #proceed-btn {
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pre-order Your Meals</h1>
+        <p>Explore a variety of dishes and pre-order for quick delivery!</p>
+    </header>
+
+    <div class="container">
+        <!-- Non-Veg Section -->
+        <div class="food-section">
+            <h2>Non-Veg Menu</h2>
+            <div class="food-list">
+                <div class="food-item">
+                    <img src="https://www.currychief.com/cdn/shop/articles/Banner_Image.jpg?v=1672411451&width=1100" alt="Chicken Biryani">
+                    <div class="food-info">
+                        <h3>Chicken Biryani</h3>
+                        <p>Flavorful and aromatic rice dish.</p>
+                        <p class="price">₹399</p>
+                        <input type="checkbox" class="select-item" data-price="599"> Select
+                    </div>
+                </div>
+                <!-- Add more Non-Veg items -->
+
+                <div class="food-item">
+                    <img src="https://www.whiskaffair.com/wp-content/uploads/2021/10/Andhra-Chicken-Curry-2-3.jpg" alt="Chicken Curry">
+                    <div class="food-info">
+                        <h3>Chicken Curry</h3>
+                        <p>Spicy curry with tender chicken.</p>
+                        <p class="price">₹499</p>
+                        <input type="checkbox" class="select-item" data-price="499"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://www.cubesnjuliennes.com/wp-content/uploads/2022/12/Tandoori-Chicken-Recipe-480x270.jpg" alt="Tandoori Chicken">
+                    <div class="food-info">
+                        <h3>Tandoori Chicken</h3>
+                        <p>Grilled chicken marinated in spices.</p>
+                        <p class="price">₹699</p>
+                        <input type="checkbox" class="select-item" data-price="699"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://i.ytimg.com/vi/HQEFiBUTrHw/maxresdefault.jpg" alt="Roasted Chicken">
+                    <div class="food-info">
+                        <h3>Roasted Chicken</h3>
+                        <p>Whole roasted chicken with herbs.</p>
+                        <p class="price">₹799</p>
+                        <input type="checkbox" class="select-item" data-price="799"> Select
+                    </div>
+                </div>
+                <div class="food-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS04Fb0ViU3JaSS6W2K-IfTPfTscfAzcpMjLA&s" alt="Mutton Curry">
+                    <div class="food-info">
+                        <h3>Mutton Curry</h3>
+                        <p>Tender mutton pieces simmered in a rich, flavorful curry.</p>
+                        <p class="price">₹799</p>
+                        <input type="checkbox" class="select-item" data-price="799"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://www.cubesnjuliennes.com/wp-content/uploads/2021/03/Best-Mutton-Biryani-Recipe.jpg" alt="Mutton Biriyani">
+                    <div class="food-info">
+                        <h3>Mutton Biriyani</h3>
+                        <p>Flavorful and aromatic rice dish.</p>
+                        <p class="price">₹649</p>
+                        <input type="checkbox" class="select-item" data-price="749"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjF5ATTeuubFSJlPgHF3IG1d7lks_xOzS7x5zIcsIRAy_5ExlX-_hdbir6uWR6yrB1d9Q&usqp=CAU" alt="Chicken Kebab">
+                    <div class="food-info">
+                        <h3>Chicken Kebab</h3>
+                        <p>Spiced minced chicken skewers grilled until crispy.</p>
+                        <p class="price">₹649</p>
+                        <input type="checkbox" class="select-item" data-price="649"> Select
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Veg Section -->
+        <div class="food-section">
+            <h2>Veg Menu</h2>
+            <div class="food-list">
+                <div class="food-item">
+                    <img src="https://www.ticklingpalates.com/wp-content/uploads/2022/07/chana-masala-recipe.jpg" alt="Chana Masala">
+                    <div class="food-info">
+                        <h3>Chana Masala</h3>
+                        <p>Chickpeas cooked in a tangy tomato gravy.</p>
+                        <p class="price">₹349</p>
+                        <input type="checkbox" class="select-item" data-price="349"> Select
+                    </div>
+                </div>
+                <div class="food-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh32l_8NdfJnoXbES8H9JQTVkCdGQpDEAkvw&s" alt="Aloo Tikki">
+                    <div class="food-info">
+                        <h3>Aloo Tikki</h3>
+                        <p>Delicious potato patties with spices.</p>
+                        <p class="price">₹149</p>
+                        <input type="checkbox" class="select-item" data-price="149"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqPYKrORYYvbe6ZHG-rkKQQCDY0JFufyF-kRUn8JTM7BvgTBBiu6JzUqvfqxUWxvJNVKE&usqp=CAU" alt="Veg Samosa">
+                    <div class="food-info">
+                        <h3>Veg Samosa</h3>
+                        <p>Crispy fried pastry with spiced potatoes.</p>
+                        <p class="price">₹50</p>
+                        <input type="checkbox" class="select-item" data-price="50"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2022/03/aloo-gobi-recipe.jpg" alt="Aloo Gobi">
+                    <div class="food-info">
+                        <h3>Aloo Gobi</h3>
+                        <p>Spicy potato and cauliflower curry.</p>
+                        <p class="price">₹199</p>
+                        <input type="checkbox" class="select-item" data-price="199"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2019/04/veg-biryani-recipe-500x500.jpg" alt="Vegetable Biryani">
+                    <div class="food-info">
+                        <h3>Vegetable Biryani</h3>
+                        <p>Fragrant rice cooked with mixed vegetables and spices.</p>
+                        <p class="price">₹599</p>
+                        <input type="checkbox" class="select-item" data-price="599"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://shwetainthekitchen.com/wp-content/uploads/2023/03/mixed-vegetable-curry.jpg" alt="Vegetable Curry">
+                    <div class="food-info">
+                        <h3>Vegetable Curry</h3>
+                        <p>A spicy blend of seasonal vegetables cooked in curry sauce.</p>
+                        <p class="price">₹349</p>
+                        <input type="checkbox" class="select-item" data-price="349"> Select
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyYAw-LYqS_93lSUbKNhDlXpobzBAVfizjLw&s" alt="Vegetable Pulao">
+                    <div class="food-info">
+                        <h3>Vegetable Pulao</h3>
+                        <p>Aromatic rice cooked with mixed vegetables.</p>
+                        <p class="price">₹399</p>
+                        <input type="checkbox" class="select-item" data-price="399"> Select
+                    </div>
+                </div>
+                
+                <!-- Add more Veg items -->
+                
+                      
+    
+    
+            </div>   
+        </div>
+
+        <div id="total-amount">Total: ₹0</div>
+        <button id="proceed-btn" onclick="redirectToPaymentPage()">Proceed</button>
+    </div>
+
+    <script>
+        let totalAmount = 0;
+
+        document.querySelectorAll('.select-item').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const price = parseInt(this.getAttribute('data-price'));
+                if (this.checked) {
+                    totalAmount += price;
+                } else {
+                    totalAmount -= price;
+                }
+                document.getElementById('total-amount').innerText = `Total: ₹${totalAmount}`;
+            });
+        });
+
+        function redirectToPaymentPage() {
+            if (totalAmount > 0) {
+                window.location.href = `payment.html?totalAmount=${totalAmount}`;
+            } else {
+                alert('Please select items before proceeding!');
+            }
+        }
+    </script>
+</body>
+</html>

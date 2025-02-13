@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            text-align: center;
+        }
+
+        header {
+            background: #6a11cb;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .hotel-card h3 {
+            margin: 10px;
+            font-size: 1.2rem;
+        }
+
+        .hotel-card p {
+            margin: 10px;
+            color: #555;
+        }
+
+        .hotel-card button {
+            margin: 10px;
+            background: #6a11cb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hotel-card button:hover {
+            background: #2575fc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Select a Hotel</h1>
+    </header>
+
+    <div class="container">
+        <div class="hotel-grid">
+            <!-- Hotel Cards -->
+            <div class="hotel-card">
+                <img src="https://www.livechennai.com/images/taj_coromandel_hotel.jpg" alt="Taj Coromandel">
+                <h3>Taj Coromandel</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Taj Coromandel'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRxuEBq91Oo49AZ49u8LYc55DwPZVyxRHO6zyQmFe8qdjnAa6qLgWZ&usqp=CAE&s" alt="ITC Grand Chola">
+                <h3>ITC Grand Chola</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=ITC Grand Chola'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShUmbBx964y6HYdpzhcp3jhroUI1ipMU-_BM1AOR86RgjNPBWZo7l2&usqp=CAE&s" alt="The Leela Palace">
+                <h3>The Leela Palace</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=The Leela Palace'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Park Hyatt Chennai">
+                <h3>Park Hyatt Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Park Hyatt Chennai'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Radisson Blu Hotel">
+                <h3>Radisson Blu Hotel</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Radisson Blu Hotel'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Hyatt Regency">
+                <h3>Hyatt Regency</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Hyatt Regency'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Trident Chennai">
+                <h3>Trident Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Trident Chennai'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Courtyard by Marriott">
+                <h3>Courtyard by Marriott</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Courtyard by Marriott'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="The Raintree Anna Salai">
+                <h3>The Raintree Anna Salai</h3>
+                <p>Veg</p>
+                <button onclick="location.href='booktable.html?hotel=The Raintree Anna Salai'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="GRT Grand Chennai">
+                <h3>GRT Grand Chennai</h3>
+                <p>Veg</p>
+                <button onclick="location.href='booktable.html?hotel=GRT Grand Chennai'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Hilton Chennai">
+                <h3>Hilton Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Hilton Chennai'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="The Westin Chennai Velachery">
+                <h3>The Westin Chennai Velachery</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=The Westin Chennai Velachery'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Green Park Hotel">
+                <h3>Green Park Hotel</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Green Park Hotel'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="The Accord Metropolitan">
+                <h3>The Accord Metropolitan</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=The Accord Metropolitan'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Ramada Plaza Chennai">
+                <h3>Ramada Plaza Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Ramada Plaza Chennai'">Select</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://via.placeholder.com/250x150" alt="Ramada Plaza Chennai">
+                <h3>Adaiyar Aananthabhavan</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="location.href='booktable.html?hotel=Ramada Plaza Chennai'">Select</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

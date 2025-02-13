@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zesty Table - Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header .btn {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .header .btn.login {
+            background-color: white;
+            color: #4CAF50;
+        }
+
+        .header .btn.signup {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://i.pinimg.com/736x/d2/36/93/d236938c9cc9b4ab5ae180540502f9dc.jpg') no-repeat center center/cover;
+            height: 90vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+        }
+
+        .hero p {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .hero .btn {
+            background-color: #FF5722;
+            color: white;
+            margin: 10px;
+            padding: 10px 20px;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 50px 20px;
+            background-color: #961818;
+            text-align: center;
+        }
+
+        .categories h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #4CAF50;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .category {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category p {
+            font-size: 1em;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Pre-Order */
+        .pre-order {
+            padding: 50px 20px;
+            background-color: #e8f5e9;
+            text-align: center;
+        }
+
+        .pre-order h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #FF5722;
+        }
+
+        .pre-order-options {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .option {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.1em;
+            max-width: 200px;
+        }
+
+        /* About */
+        .about {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .about h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #4CAF50;
+        }
+
+        .about p {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 50px 20px;
+            background-color: #e8f5e9;
+        }
+
+        .contact h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact input, .contact textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact .btn.submit {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+   <!-- Updated Header Section -->
+<header class="header">
+    <div class="logo">Zesty Table</div>
+    <nav>
+        <a href="#categories">Menu</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+        
+        <a href="landing.html" class="btn signup">Sign Up</a>
+    </nav>
+</header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>"A Perfect Spot for Food Enthusiasts"</h1>
+            <p>Reserve your table or pre-order for a seamless dining experience</p>
+            <button class="btn primary">Reserve a Table</button>
+            <button class="btn secondary">Pre-Order Now</button>
+        </div>
+    </section>
+
+    <!-- Top Categories Section -->
+    <section id="categories" class="categories">
+        <h2>Top Categories</h2>
+        <div class="category-grid">
+            <div class="category">
+                <img src="images/burger.png" alt="Burger">
+                <p>Burger</p>
+            </div>
+            <div class="category">
+                <img src="images/momos.png" alt="Momos">
+                <p>Momos</p>
+            </div>
+            <div class="category">
+                <img src="images/noodles.png" alt="Noodles">
+                <p>Noodles</p>
+            </div>
+            <div class="category">
+                <img src="images/pizza.png" alt="Pizza">
+                <p>Pizza</p>
+            </div>
+            <div class="category">
+                <img src="images/chicken.png" alt="Chicken">
+                <p>Chicken</p>
+            </div>
+            <div class="category">
+                <img src="images/cake.png" alt="Cake">
+                <p>Cake</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Order Section -->
+    <section class="pre-order">
+        <h2>Pre-Order for Dine-In or Take-Away</h2>
+        <div class="pre-order-options">
+            <div class="option">Explore the Menu</div>
+            <div class="option">Select Your Favorites</div>
+            <div class="option">Schedule a Time</div>
+            <div class="option">Enjoy at Your Convenience</div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>Zesty Table offers an unforgettable dining experience with a focus on freshly prepared meals. Our restaurant is designed for food lovers who enjoy a cozy atmosphere with great service. From handcrafted dishes to delightful beverages, we have something for everyone.</p>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message"></textarea>
+            <button class="btn submit">Submit</button>
+        </form>
+        <div class="contact-info">
+            <p>Email: info@zestytable.com</p>
+            <p>Phone: +123 456 7890</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Zesty Table. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback System with Ratings</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #f1c40f;
+        }
+
+        .btn {
+            background-color: #f1c40f;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: black;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #f39c12;
+        }
+
+        .feedback-list {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .feedback-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 15px 20px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            color: #f39c12;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .ratings {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .ratings span {
+            font-size: 2em;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .ratings span.active {
+            color: #ffc107;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .modal-footer button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #f1c40f;
+            color: black;
+        }
+
+        .submit-btn:hover {
+            background-color: #f39c12;
+        }
+
+        .close-btn {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .close-btn:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Feedback System</h1>
+        <h2>What Our Customers Say</h2>
+
+        <button class="btn" onclick="showModal()">Add Feedback</button>
+
+        <div class="feedback-list" id="feedbackList"></div>
+    </div>
+
+    <div class="modal" id="feedbackModal">
+        <div class="modal-header">Leave Your Feedback</div>
+        <input id="userName" type="text" placeholder="Your Name" />
+        <div class="ratings" id="ratings">
+            <span data-value="1">&#9733;</span>
+            <span data-value="2">&#9733;</span>
+            <span data-value="3">&#9733;</span>
+            <span data-value="4">&#9733;</span>
+            <span data-value="5">&#9733;</span>
+        </div>
+        <textarea id="feedbackInput" placeholder="Write your feedback here..."></textarea>
+        <div class="modal-footer">
+            <button class="submit-btn" onclick="submitFeedback()">Submit</button>
+            <button class="close-btn" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        const feedbackList = document.getElementById('feedbackList');
+        const feedbackModal = document.getElementById('feedbackModal');
+        const userNameInput = document.getElementById('userName');
+        const feedbackInput = document.getElementById('feedbackInput');
+        const ratings = document.getElementById('ratings').children;
+
+        let selectedRating = 0;
+
+        function showModal() {
+            feedbackModal.classList.add('active');
+        }
+
+        function closeModal() {
+            feedbackModal.classList.remove('active');
+            feedbackInput.value = '';
+            userNameInput.value = '';
+            resetRatings();
+        }
+
+        function resetRatings() {
+            selectedRating = 0;
+            Array.from(ratings).forEach(star => star.classList.remove('active'));
+        }
+
+        Array.from(ratings).forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.dataset.value);
+                highlightRatings(selectedRating);
+            });
+        });
+
+        function highlightRatings(rating) {
+            Array.from(ratings).forEach((star, index) => star.classList.toggle('active', index < rating));
+        }
+
+        function submitFeedback() {
+            const userName = userNameInput.value.trim();
+            const feedbackText = feedbackInput.value.trim();
+            if (!userName || !selectedRating || !feedbackText) {
+                alert('Please provide your name, rating, and review!');
+                return;
+            }
+
+            const feedbackCard = document.createElement('div');
+            feedbackCard.classList.add('feedback-card');
+            feedbackCard.innerHTML = `<strong>${userName}</strong><br><div>Rating: ${'&#9733;'.repeat(selectedRating)}${'&#9734;'.repeat(5 - selectedRating)}</div><p>${feedbackText}</p>`;
+            feedbackList.prepend(feedbackCard);
+            closeModal();
+        }
+    </script>
+</body>
+</html>

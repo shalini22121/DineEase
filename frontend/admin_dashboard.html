@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Food Table Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #ff6a88;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar button {
+            background: #ff6a88;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .sidebar button:hover {
+            background: #fc5c7d;
+        }
+
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            background: #ff6a88;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .menu-btn.hidden {
+            display: none;
+        }
+
+        .main {
+            padding: 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main.shifted {
+            margin-left: 2em;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .card table th,
+        .card table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .card table th {
+            background: #ff6a88;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Logout</a>
+        </nav>
+    </header>
+    <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar" id="sidebar">
+        <button onclick="location.href='viewbookings.html'">View Bookings</button>
+        <button onclick="location.href='viewpreorders.html'">View Pre-Orders</button>
+        <button onclick="location.href='manageoffers.html'">Manage Special Offers</button>
+        <button onclick="location.href='feedback.html'">View Feedback</button>
+        <button style="margin-top: auto; background: red;" onclick="toggleSidebar()">Close</button>
+    </div>
+    <div class="main" id="main">
+        <div class="card">
+            <h2>Recent Bookings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>User</th>
+                        <th>Table Details</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="booking-data">
+                    <!-- Booking data will be dynamically loaded here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h2>Recent Pre-Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Order Details</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="preorder-data">
+                    <!-- Pre-order data will be dynamically loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            const menuBtn = document.getElementById('menu-btn');
+
+            sidebar.classList.toggle('active');
+            main.classList.toggle('shifted');
+
+            if (sidebar.classList.contains('active')) {
+                menuBtn.classList.add('hidden');
+            } else {
+                menuBtn.classList.remove('hidden');
+            }
+        }
+
+        // Example: Fetch and populate booking data
+        function fetchBookings() {
+            fetch('http://localhost:3000/bookings')
+                .then(response => response.json())
+                .then(data => {
+                    const bookingTable = document.getElementById('booking-data');
+                    bookingTable.innerHTML = data.map(booking => `
+                        <tr>
+                            <td>${booking.id}</td>
+                            <td>${booking.user}</td>
+                            <td>${booking.tableDetails}</td>
+                            <td>${booking.date}</td>
+                        </tr>
+                    `).join('');
+                })
+                .catch(error => console.error('Error fetching bookings:', error));
+        }
+
+        // Example: Fetch and populate pre-order data
+        function fetchPreOrders() {
+            fetch('http://localhost:3000/preorders')
+                .then(response => response.json())
+                .then(data => {
+                    const preorderTable = document.getElementById('preorder-data');
+                    preorderTable.innerHTML = data.map(order => `
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.user}</td>
+                            <td>${order.orderDetails}</td>
+                            <td>${order.date}</td>
+                        </tr>
+                    `).join('');
+                })
+                .catch(error => console.error('Error fetching pre-orders:', error));
+        }
+
+        // Initialize dashboard data
+        fetchBookings();
+        fetchPreOrders();
+        function logout() {
+            // Clear session storage or any stored user data
+            localStorage.removeItem('loggedInUser'); // Remove logged-in user data (if stored in local storage)
+            alert('You have been logged out.');
+            window.location.href = 'landing.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

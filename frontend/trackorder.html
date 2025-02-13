@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://www.esferasoft.com/wp-content/uploads/2023/05/people-taking-photos-food-scaled-e1718602854504.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #38d311;
+            line-height: 1.6;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        header {
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 30px;
+            background-color: rgba(255, 126, 95, 0.8);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align:center;
+        }
+
+        header .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        header .links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        header .links a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+             text-align:center;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .countdown {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff7e5f;
+            margin-bottom: 30px;
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background: conic-gradient(#ff7e5f 0%, #f1f1f1 0%);
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-ring .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff7e5f;
+        }
+
+        .live-updates {
+            font-size: 16px;
+            margin-top: 30px;
+            font-weight: normal;
+            color: #333;
+        }
+        .div {
+  font-size: 36px; /* Make "Track Your Order" larger */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center; /* Center the heading */
+}
+
+        .action-btn {
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(90deg, #feb47b, #ff7e5f);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+        <header>
+    <centre>
+            <div>Track Your Order</div>
+    </centre>
+            <div class="links">
+                <a href="user_dashboard.html">Home</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Logout</a>
+            </div>
+        </header>
+    <div class="container">
+        <div class="status" id="order-status">Order Status: <span>Order Placed</span></div>
+
+        <!-- Circular Progress Ring -->
+        <div class="progress-ring">
+            <div class="circle" id="progress-circle">0%</div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown">
+            Estimated Time Remaining: <span id="countdown-timer">30:00</span>
+        </div>
+
+        <!-- Live Updates -->
+        <div class="live-updates" id="live-updates">
+            Preparing your food...
+        </div>
+
+        <!-- Action Button -->
+        <button class="action-btn" onclick="simulateUpdates()">Simulate Live Update</button>
+    </div>
+
+    <script>
+        // Variables
+        const progressCircle = document.getElementById('progress-circle');
+        const orderStatus = document.getElementById('order-status');
+        const liveUpdates = document.getElementById('live-updates');
+        const countdownTimer = document.getElementById('countdown-timer');
+    
+        let progress = 0; // Progress percentage
+        let timeLeft = 30 * 60; // 30 minutes in seconds
+    
+        const updates = [
+            'Pre-order confirmed. Preparing ingredients...',
+            'Chef has started cooking your meal...',
+            'Final touches are being added to your dish...',
+            'Meal is being packed for take-away or plated for dine-in...',
+            'Your meal is ready for pick-up or served for dine-in. Enjoy!'
+        ];
+    
+        // Update countdown timer
+        function updateCountdown() {
+            const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const seconds = (timeLeft % 60).toString().padStart(2, '0');
+            countdownTimer.innerText = `${minutes}:${seconds}`;
+            timeLeft--;
+    
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                countdownTimer.innerText = "00:00";
+                progressCircle.innerText = "100%";
+                orderStatus.innerHTML = 'Order Status: <span>Your meal is ready!</span>';
+                liveUpdates.innerText = 'Please proceed to pick-up or enjoy your dine-in meal!';
+            }
+        }
+    
+        // Update circular progress and live updates
+        function simulateUpdates() {
+            if (progress >= 100) {
+                alert('Your meal is already ready!');
+                return;
+            }
+    
+            progress += 25; // Increment progress by 25%
+    
+            // Update circular progress
+            const angle = (progress / 100) * 360;
+            progressCircle.style.background = `conic-gradient(#ff7e5f ${angle}deg, #f1f1f1 ${angle}deg)`;
+            progressCircle.innerText = `${progress}%`;
+    
+            // Update status and live updates
+            if (progress <= 100 && updates.length > 0) {
+                const update = updates.shift();
+                orderStatus.innerHTML = `Order Status: <span>${update}</span>`;
+                liveUpdates.innerText = update;
+            }
+        }
+    
+        // Countdown timer interval
+        const timerInterval = setInterval(updateCountdown, 1000);
+    </script>
+    

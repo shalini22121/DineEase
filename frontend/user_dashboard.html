@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Table Booking Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #ff6a88;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar button {
+            background: #ff6a88;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .sidebar button:hover {
+            background: #fc5c7d;
+        }
+
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            background: #ff6a88;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .menu-btn.hidden {
+            display: none;
+        }
+
+        .main {
+            padding: 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main.shifted {
+            margin-left: 2em;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #ff6a88;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Food Table Booking Dashboard</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+    <button class="menu-btn" id="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar" id="sidebar">
+        <button onclick="location.href='booktable.html'">Book a Table</button>
+        <button onclick="location.href='preorder.html'">Pre-Order Food</button>
+        <button onclick="location.href='trackorder.html'">Track Your Order</button>
+        <button>Special Offers</button>
+        <button onclick="location.href='feedback.html'">Feedback</button>
+        <button style="margin-top: auto; background: red;" onclick="toggleSidebar()">Close</button>
+    </div>
+    <div class="container">
+        <!-- Enhanced Pre-Order Food Card -->
+        <div class="card preorder">
+            <h2>🍽 Pre-Order Food</h2>
+            <p>Order your favorite meals before arriving at the restaurant.</p>
+            <img class="image-preview" src="https://img.freepik.com/free-photo/people-taking-photos-food_23-2149303524.jpg">
+            <div class="details">Estimated Pickup: 30 mins ⏳</div>
+            <a href="preorder.html">Pre-Order Now</a>
+        </div>
+
+        <!-- Enhanced Book a Table Card -->
+        <div class="card booktable">
+            <h2>📅 Book a Table</h2>
+            <p>Reserve your table in advance for a hassle-free experience.</p>
+            <img class="image-preview" src="https://png.pngtree.com/background/20230528/original/pngtree-variety-of-indian-food-is-served-on-a-table-picture-image_2778395.jpg">
+            <div class="details">Available Tables: 7/10 🪑</div>
+            <a href="booktable.html">Book Now</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            const menuBtn = document.getElementById('menu-btn');
+
+            sidebar.classList.toggle('active');
+            main.classList.toggle('shifted');
+
+            if (sidebar.classList.contains('active')) {
+                menuBtn.classList.add('hidden'); // Hide menu button
+            } else {
+                menuBtn.classList.remove('hidden'); // Show menu button
+            }
+        }
+
+        function logout() {
+            // Clear session storage or any stored user data
+            localStorage.removeItem('loggedInUser'); // Remove logged-in user data (if stored in local storage)
+            alert('You have been logged out.');
+            window.location.href = 'landing.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

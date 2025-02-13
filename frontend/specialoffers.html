@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Offers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #f1bce4;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .offers-container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .offer-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .offer-card h2 {
+            font-size: 20px;
+            margin: 15px 0 10px;
+        }
+
+        .offer-card p {
+            color: #666;
+            margin: 0 15px 10px;
+            font-size: 14px;
+        }
+
+        .offer-card button {
+            background: #f1bce4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .offer-card button:hover {
+            background: #eb9ed4;
+        }
+
+        .offer-details {
+            display: none;
+            padding: 10px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .offer-details p {
+            margin: 5px 0;
+        }
+
+        .offer-details span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Special Offers</h1>
+        <p>Time's Running Out! Grab the Deal!😉</p>
+        
+    </header>
+    <div class="offers-container">
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegneEIjn7BXdB19uN6O6G3V030wDdHJC1Sw&s" alt="Butter Chicken">
+            <h2>Butter Chicken</h2>
+            <p>Buy 1 Get 1 Free on Butter Chicken! Offer valid till Friday.</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹599</span></p>
+                <p>Discounted Price: <span>Buy 1 Get 1 Free</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ2WY2YmIJtXrpmDToEHwJIOAcyBefjpFwXg&s" alt="Paneer Tikka">
+            <h2>Paneer Tikka</h2>
+            <p>20% off on all Paneer Tikka this weekend!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹350</span></p>
+                <p>Discounted Price: <span>₹280</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT66d8jsPBIoaw0xeBZWHL_T9OQPOBJDKeAlg&s" alt="Biryani">
+            <h2>Biryani</h2>
+            <p>Free drink with every Biryani order!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹700</span></p>
+                <p>Discounted Price: <span>₹700 + Free Drink</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSj4XhJE3LJLqeFVQ65SqvLBp43p4BCRSz1w&s" alt="Masala Dosa">
+            <h2>Masala Dosa</h2>
+            <p>Get 25% off on Masala Dosa during breakfast hours.</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹150</span></p>
+                <p>Discounted Price: <span>₹112.50</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQR_U_PmOvD5A_0_p2xfrj1bfVW2Pj4YHKLg&s" alt="Chole Bhature">
+            <h2>Chole Bhature</h2>
+            <p>Get 1 Free Lassi with every Chole Bhature order!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹250</span></p>
+                <p>Discounted Price: <span>₹250 + Free Lassi</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheP2bGltpFCajyA-f0f_lU82AfUv0yivEZw&s" alt="Dal Makhani">
+            <h2>Dal Makhani</h2>
+            <p>Flat 10% off on Dal Makhani this week!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹180</span></p>
+                <p>Discounted Price: <span>₹162</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTguG2wcRgMQTG24afaJAlhBX_pwFe3_Z-jIQ&s" alt="Palak Paneer">
+            <h2>Palak Paneer</h2>
+            <p>Get 1 Free Naan with every Palak Paneer order!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹350</span></p>
+                <p>Discounted Price: <span>₹350 + Free Naan</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Ri5LQA_Jp-iZtnB0iZqaDyDEONNudc_77Q&s" alt="Tandoori Roti">
+            <h2>Tandoori Roti</h2>
+            <p>Free drink with every Tandoori Roti order!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹40</span></p>
+                <p>Discounted Price: <span>₹40 + Free Drink</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3aJrkMZfZWaRkqQu36Y9TBzYlCrkKHvy7mw&s" alt="Gulab Jamun">
+            <h2>Gulab Jamun</h2>
+            <p>50% off on Gulab Jamun after 8 PM.</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹150</span></p>
+                <p>Discounted Price: <span>₹75</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrZZYV9Eu13fxu8qXT98ovX6SrG3hGOtpqPw&s" alt="Rajma Chawal">
+            <h2>Rajma Chawal</h2>
+            <p>Buy 1 Get 1 Free on Rajma Chawal!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹250</span></p>
+                <p>Discounted Price: <span>Buy 1 Get 1 Free</span></p>
+            </div>
+        </div>
+        <div class="offer-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaN3Vr4oso27fl0dvAjDwn3rTgv1QEOA0v3g&s" alt="Kebabs">
+            <h2>Kebabs</h2>
+            <p>20% off on all Kebabs this weekend!</p>
+            <button onclick="toggleDetails(this)">View More</button>
+            <div class="offer-details">
+                <p>Real Price: <span>₹500</span></p>
+                <p>Discounted Price: <span>₹400</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails(button) {
+            const details = button.nextElementSibling;
+            const isVisible = details.style.display === "block";
+            details.style.display = isVisible ? "none" : "block";
+            button.textContent = isVisible ? "View More" : "View Less";
+        }
+    </script>
+</body>
+</html>

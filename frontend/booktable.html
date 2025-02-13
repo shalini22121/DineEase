@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('images/table.jpg'); /* Replace with your image path */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      background-color: #f6ebeb;
+    }
+
+    header {
+      background-color: #499daa;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: rgba(184, 171, 175, 0.8);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    form label {
+      display: block;
+      font-weight: bold;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    form input,
+    form select,
+    form button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #1fa0b4;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: #499daa;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #9cadf2;
+    }
+
+    #successMessage {
+      text-align: center;
+      color: green;
+      margin-top: 1rem;
+    }
+
+    .details-button {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .details-button:hover {
+      background-color: #45a049;
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .radio-group input {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Book a Table</h1>
+  </header>
+  <div class="container">
+    <h2>Reserve Your Table</h2>
+    <form id="bookingForm">
+      <label for="name">Enter Your Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+
+      <label for="slot">Select Slot</label>
+      <select id="slot" required>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
+      </select>
+
+      <label for="tableType">Table Type</label>
+      <select id="tableType" required>
+        <option value="">Select Table Type</option>
+        <option value="Standard">Standard</option>
+        <option value="VIP">VIP</option>
+      </select>
+
+      <label for="tableNumber">Table Number</label>
+      <select id="tableNumber" required>
+        <option value="">Select Table Number</option>
+      </select>
+
+      <label>Choose Seating Preference</label>
+      <div class="radio-group">
+        <label><input type="radio" name="seating" value="indoor" required> Indoor</label>
+        <label><input type="radio" name="seating" value="outdoor"> Outdoor</label>
+      </div>
+
+      <label for="mobile">Enter Mobile Number</label>
+      <input type="text" id="mobile" placeholder="Mobile Number" required>
+
+      <label for="email">Enter Email ID</label>
+      <input type="email" id="email" placeholder="Email Address" required>
+
+      <label>Number of People</label>
+      <div class="radio-group">
+        <label><input type="radio" name="people" value="single" required> Single</label>
+        <label><input type="radio" name="people" value="couple"> Couple</label>
+        <label><input type="radio" name="people" value="family" id="familyRadio"> Family</label>
+      </div>
+
+      <div id="familyInputContainer" style="display: none; margin-top: 1rem;">
+        <label for="numPeople">Enter Number of People</label>
+        <input type="number" id="numPeople" placeholder="Number of People" min="1">
+      </div>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" id="time" required>
+
+      <button type="submit">Book Now</button>
+    </form>
+    <p id="successMessage" style="display:none;">Booking successful!</p>
+    <button class="details-button" onclick="viewDetails()">View Booking Details</button>
+  </div>
+  <script>
+    const tableTypeSelect = document.getElementById('tableType');
+    const tableNumberSelect = document.getElementById('tableNumber');
+
+    // Populate table numbers based on table type
+    tableTypeSelect.addEventListener('change', function () {
+      const tableType = this.value;
+      tableNumberSelect.innerHTML = '';
+      if (tableType === 'Standard') {
+        for (let i = 1; i <= 5; i++) {
+          const option = document.createElement('option');
+          option.value = `Standard ${i}`;
+          option.textContent = `Standard Table ${i}`;
+          tableNumberSelect.appendChild(option);
+        }
+      } else if (tableType === 'VIP') {
+        for (let i = 1; i <= 10; i++) {
+          const option = document.createElement('option');
+          option.value = `VIP ${i}`;
+          option.textContent = `VIP Table ${i}`;
+          tableNumberSelect.appendChild(option);
+        }
+      }
+    });
+
+
+document.getElementById('bookingForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  // Retrieve form data
+  const name = document.getElementById('name').value.trim();
+  const slot = document.getElementById('slot').value;
+  const table = document.getElementById('tableNumber').value;
+  const seating = document.querySelector('input[name="seating"]:checked').value;
+  const mobile = document.getElementById('mobile').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+
+  // Get the selected people type
+  let people = '';
+  const selectedPeopleType = document.querySelector('input[name="people"]:checked').value;
+
+  // If "Family" is selected, validate the "Number of People" input
+  if (selectedPeopleType === 'family') {
+    const numPeople = document.getElementById('numPeople').value.trim();
+    if (!numPeople || isNaN(numPeople) || parseInt(numPeople) <= 0) {
+      alert('Please enter a valid number of people for the family.');
+      return; // Stop form submission
+    }
+    people = `${numPeople} (Family)`; // Set number of people for family
+  } else {
+    people = selectedPeopleType.charAt(0).toUpperCase() + selectedPeopleType.slice(1); // Capitalize "Single" or "Couple"
+  }
+
+  // Create booking details object
+  const bookingDetails = {
+    id: 'B' + Date.now(),
+    name,
+    slot,
+    table,
+    seating,
+    mobile,
+    email,
+    people,
+    date,
+    time,
+  };
+  localStorage.setItem('currentBooking', JSON.stringify(bookingDetails));  // <-- Add this line
+  // Save booking details to localStorage
+  const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+  bookings.push(bookingDetails);
+  localStorage.setItem('bookings', JSON.stringify(bookings));
+
+  // Show success message
+  const successMessage = document.getElementById('successMessage');
+  successMessage.textContent = `Booking successful! Booking ID: ${bookingDetails.id}`;
+  successMessage.style.display = 'block';
+
+  // Reset the form and hide the family input field
+  document.getElementById('bookingForm').reset();
+  document.getElementById('familyInputContainer').style.display = 'none';
+});
+
+// Show/hide family input field based on "Family" radio button selection
+document.querySelectorAll('input[name="people"]').forEach((radio) => {
+  radio.addEventListener('change', function () {
+    const familyInputContainer = document.getElementById('familyInputContainer');
+    if (this.value === 'family') {
+      familyInputContainer.style.display = 'block';
+      document.getElementById('numPeople').setAttribute('required', 'required');
+    } else {
+      familyInputContainer.style.display = 'none';
+      document.getElementById('numPeople').removeAttribute('required');
+    }
+  });
+});
+
+// Function to view booking details (redirects to receipt page)
+function viewDetails() {
+  window.location.href = 'receipt.html';
+}
+
+  </script>
+</body>
+</html>

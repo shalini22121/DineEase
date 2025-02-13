@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            text-align: center;
+        }
+
+        header {
+            background: #6a11cb;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .hotel-card h3 {
+            margin: 10px;
+            font-size: 1.2rem;
+        }
+
+        .hotel-card p {
+            margin: 10px;
+            color: #555;
+        }
+
+        .hotel-card button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 10px;
+            background: #6a11cb;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hotel-card button:hover {
+            background: #2575fc;
+        }
+
+        .option-container {
+            display: none;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .option-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-box button {
+            width: 100%;
+            margin: 10px 0;
+            background: #6a11cb;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .option-box button:hover {
+            background: #2575fc;
+        }
+    </style>
+    <script>
+        function showOptions(hotel) {
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.style.display = 'flex';
+            optionsContainer.dataset.hotel = hotel;
+        }
+
+        function handleOption(option) {
+            const optionsContainer = document.getElementById('options-container');
+            const hotel = optionsContainer.dataset.hotel;
+
+            if (option === 'dining') {
+                window.location.href = `booktable.html?hotel=${hotel}`;
+            } else if (option === 'takeaway') {
+                window.location.href = `order.html?hotel=${hotel}`;
+            }
+        }
+
+        function closeOptions() {
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Select a Hotel</h1>
+    </header>
+
+    <div class="container">
+        <div class="hotel-grid">
+            <div class="hotel-card">
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/217745182.jpg?k=0ae50a446ba6928de2c72aa2bac496c696c325ab46737f5504c451fe6127bc5e&o=&hp=1" alt="Hotel 1">
+                <h3>Taj Hotel</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 1')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRxuEBq91Oo49AZ49u8LYc55DwPZVyxRHO6zyQmFe8qdjnAa6qLgWZ&usqp=CAE&s" alt="Hotel 2">
+                <h3>ITC Grand Chola</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 2')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShUmbBx964y6HYdpzhcp3jhroUI1ipMU-_BM1AOR86RgjNPBWZo7l2&usqp=CAE&s" alt="Hotel 3">
+                <h3>The Leela Palace</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 3')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/529051799.jpg?k=18b4d386d831137accdb83487ddc70060fc8ead7762589797d2ce995fb538952&o=&hp=1" alt="Hotel 4">
+                <h3>Park Hyatt Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 4')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLKLaHE2DQbKYA7b1lMQOAZ9WQu5LSk247Tw&s" alt="Hotel 5">
+                <h3>Radisson Blu Hotel</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 5')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/The_first_Hyatt_Hotel_in_South_India.jpg" alt="Hotel 5">
+                <h3>Hyatt Regency</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 5')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://www.tridenthotels.com/-/media/trident-hotel/trident-chennai/Chennai-Overview/Special-Offer/desktop-1920x1000.jpg" alt="Hotel 5">
+                <h3>Trident Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 5')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/8c/88/8a/courtyard-by-marriott.jpg?w=700&h=-1&s=1" alt="Hotel 5">
+                <h3>Courtyard by Marriott</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 5')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/45430568.jpg?k=11947a13ebf604161e258e9a46512b8aa2de6d59f236cbd042591b8937d0e349&o=&hp=1" alt="Hotel 5">
+                <h3>The Raintree Anna Salai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 5')">Pre Order</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://imgcy.trivago.com/c_fill,d_dummy.jpeg,e_sharpen:60,f_auto,h_534,q_40,w_800/hotelier-images/28/e0/dd8839bda70482cef72bca7eedbcc88564b2e9b6193b96cf4aa432ab6c2c.jpeg" alt="Hotel 5">
+                <h3>GRT Grand Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <button onclick="showOptions('Hotel 5')">Pre Order</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="options-container" class="option-container" onclick="closeOptions()">
+        <div class="option-box" onclick="event.stopPropagation();">
+            <h3>Choose an Option</h3>
+            <button onclick="handleOption('dining')">Dining</button>
+            <button onclick="handleOption('takeaway')">Take Away</button>
+            <button onclick="closeOptions()">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

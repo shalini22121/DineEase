@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Table Booking Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #f55676;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 500px;
+            height: auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgb(231, 77, 77);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            margin: 10px 0;
+            padding-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .preorder {
+            background: #a222ec;
+            color: white;
+            padding-bottom: 20px;
+        }
+
+        .booktable {
+            background: #f07cc9;
+            color: white;
+            padding-bottom: 20px;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 15px;
+            background: rgb(243, 176, 232);
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .card a:hover {
+            background: rgb(230, 150, 220);
+        }
+
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .details {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            width: 90%;
+            font-weight: bold;
+        }
+
+        .icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Food Table Booking Dashboard</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Enhanced Pre-Order Food Card -->
+        <div class="card preorder">
+            <h2>🍽 Pre-Order Food</h2>
+            <p>Order your favorite meals before arriving at the restaurant.</p>
+            <img class="image-preview" src="https://img.freepik.com/free-photo/people-taking-photos-food_23-2149303524.jpg">
+            <div class="details">Estimated Pickup: 30 mins ⏳</div>
+            <a href="preorder.html">Pre-Order Now</a>
+        </div>
+
+        <!-- Enhanced Book a Table Card -->
+        <div class="card booktable">
+            <h2>📅 Book a Table</h2>
+            <p>Reserve your table in advance for a hassle-free experience.</p>
+            <img class="image-preview" src="https://png.pngtree.com/background/20230528/original/pngtree-variety-of-indian-food-is-served-on-a-table-picture-image_2778395.jpg">
+            <div class="details">Available Tables: 7/10 🪑</div>
+            <a href="booktable.html">Book Now</a>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            alert('You have been logged out.');
+            window.location.href = 'landing.html';
+        }
+    </script>
+</body>
+</html>
